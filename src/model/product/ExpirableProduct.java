@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public class ExpirableProduct extends BaseProduct implements IExpirableProduct{
     private LocalDate expirationDate;
 
-    public ExpirableProduct(String name, int price, int quantity, LocalDate expirationDate) {
+    public ExpirableProduct(String name, double price, int quantity, LocalDate expirationDate) {
         super(name, price, quantity);
         this.expirationDate = expirationDate;
     }
@@ -17,6 +17,6 @@ public class ExpirableProduct extends BaseProduct implements IExpirableProduct{
 
     @Override
     public boolean isExpired() {
-        return expirationDate.isAfter(LocalDate.now());
+        return expirationDate.isBefore(LocalDate.now());
     }
 }

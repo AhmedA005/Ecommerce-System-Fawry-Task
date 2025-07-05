@@ -1,15 +1,17 @@
 package model.cart;
 
+import model.product.IProduct;
 import model.product.IShippableProduct;
 import model.product.ShippableProduct;
+import validations.ValidateUtils;
 
 import java.util.*;
 
 public class ShoppingCart {
     private List<CartItem> items = new ArrayList<CartItem>();
-    public void addItem(CartItem item) {
-        // TODO: add validation
-        items.add(item);
+    public void addItem(IProduct product, int quantity) {
+        ValidateUtils.validateAddToCart(product, quantity);
+        items.add(new CartItem(product, quantity));
     }
     public void removeItem(CartItem item) {
         items.remove(item);

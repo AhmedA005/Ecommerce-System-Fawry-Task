@@ -2,10 +2,10 @@ package model.product;
 
 public abstract class BaseProduct implements IProduct {
     protected String name;
-    protected int price;
+    protected double price;
     protected int quantity;
 
-    public BaseProduct(String name, int price, int quantity) {
+    public BaseProduct(String name, double price, int quantity) {
         this.name = name;
         this.price = price;
         this.quantity = quantity;

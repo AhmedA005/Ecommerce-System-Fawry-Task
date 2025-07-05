@@ -6,7 +6,7 @@ import java.time.LocalDate;
 public class ExpirableShippableProduct extends BaseProduct implements IShippableProduct, IExpirableProduct {
     private double weight;
     private LocalDate expirationDate;
-    public ExpirableShippableProduct(String name, int price, int quantity, double weight, LocalDate expirationDate) {
+    public ExpirableShippableProduct(String name, double price, int quantity, double weight, LocalDate expirationDate) {
         super(name, price, quantity);
         if (weight <= 0) {
             throw new IllegalArgumentException("Weight must be greater than 0");
@@ -22,7 +22,7 @@ public class ExpirableShippableProduct extends BaseProduct implements IShippable
 
     @Override
     public boolean isExpired() {
-        return expirationDate.isAfter(LocalDate.now());
+        return expirationDate.isBefore(LocalDate.now());
     }
 
     @Override

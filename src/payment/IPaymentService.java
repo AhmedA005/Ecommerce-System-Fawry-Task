@@ -2,6 +2,6 @@ package payment;
 
 import model.Customer;
 
-public interface IPayemntService {
+public interface IPaymentService {
     boolean processPayment(Customer customer, double amount);
 }

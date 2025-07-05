@@ -4,5 +4,5 @@ import model.Customer;
 import model.cart.ShoppingCart;
 
 public interface ICheckoutService {
-    void chekout(Customer customer, ShoppingCart cart);
+    void checkout(Customer customer, ShoppingCart cart);
 }

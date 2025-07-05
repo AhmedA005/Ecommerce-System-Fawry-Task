@@ -5,29 +5,29 @@ import model.cart.CartItem;
 import model.cart.ShoppingCart;
 import model.product.IShippableProduct;
 import model.shipping.IShippingService;
-import payment.IPayemntService;
+import payment.IPaymentService;
+import validations.ValidateUtils;
 
 import java.util.List;
 
 public class CheckoutService implements ICheckoutService {
     private IShippingService shippingService;
-    private IPayemntService paymntService;
+    private IPaymentService paymentService;
 
-    public CheckoutService(IShippingService shippingService, IPayemntService paymntService) {
+    public CheckoutService(IShippingService shippingService, IPaymentService paymentService) {
         this.shippingService = shippingService;
-        this.paymntService = paymntService;
+        this.paymentService = paymentService;
     }
 
     @Override
-    public void chekout(Customer customer, ShoppingCart cart) {
-        // TODO add validation
-
+    public void checkout(Customer customer, ShoppingCart cart) {
+        ValidateUtils.validateCheckout(customer, cart);
         double subtotal = cart.getTotal();
         List<IShippableProduct> shippableProducts = cart.getShippableProducts();
         double shippingFee = shippingService.calculateShippingFee(shippableProducts);
         double total = subtotal + shippingFee;
 
-        if (!paymntService.processPayment(customer, total)) {
+        if (!paymentService.processPayment(customer, total)) {
             throw new RuntimeException("Payment failed");
         }
 
